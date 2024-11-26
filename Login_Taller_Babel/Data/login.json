@@ -1,4 +1,16 @@
 {
-  "username": "tomsmith",
-  "password": "SuperSecretPassword!"
+  "credenciales": [
+    {
+      "username": "tomsmith",
+      "password": "SuperSecretPassword!"
+    },
+    {
+      "username": "tomsmith2",
+      "password": "SuperSecretPassword!2"
+    },
+    {
+      "username": "tomsmith3",
+      "password": "SuperSecretPassword!3"
+    }
+  ]
 }
