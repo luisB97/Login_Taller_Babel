@@ -1,3 +1,4 @@
+using Login_Taller_Babel.Genericos;
 using Login_Taller_Babel.PageObject;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -6,9 +7,10 @@ namespace Login_Taller_Babel.Test
 {
     public class Tests
     {
-        //variables globales para que la vean todos los métodos de esta clase
+        //declarar variables globales para que la vean todos los métodos de esta clase
         public IWebDriver driver;
         public LoginPage login;
+        public LeerJson json;
         public String baseURL = "https://the-internet.herokuapp.com/login";
 
         //Los hooks ejecutan ciertos trozos de código en ciertas partes de mi test, con esto no tengo duplicidad de código y reutilizo código
@@ -20,6 +22,8 @@ namespace Login_Taller_Babel.Test
             driver.Navigate().GoToUrl(baseURL);
 
             login = new LoginPage(driver); //El driver definido en el test va a viajar a LoginPage
+
+            json = new LeerJson();
         }
 
         [TearDown]
@@ -29,10 +33,14 @@ namespace Login_Taller_Babel.Test
             driver.Quit();//Cerrar el ChromeDriver del administrador de tareas
         }
 
-        [TestCase("tomsmith", "SuperSecretPassword!")] //Se puede enviar n cantidad de veces (iteraciones)
-        public void IngresoCorrecto(String user, String password)
+        [Test] 
+        public void IngresoCorrecto()
         {
-            login.IngresarCredenciales(user, password);
+            var data = json.login_data();
+            String user = data.username;
+            String pass = data.password;
+
+            login.IngresarCredenciales(user, pass);
         }
     }
 }
