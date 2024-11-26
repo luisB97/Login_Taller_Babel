@@ -29,17 +29,10 @@ namespace Login_Taller_Babel.Test
             driver.Quit();//Cerrar el ChromeDriver del administrador de tareas
         }
 
-        [Test]
-        public void IngresoCorrecto()
+        [TestCase("tomsmith", "SuperSecretPassword!")] //Se puede enviar n cantidad de veces (iteraciones)
+        public void IngresoCorrecto(String user, String password)
         {
-            login.IngresarCredenciales();
-
-        }
-
-        [Test]
-        public void IngresoIncorrecto()
-        {
-            login.IngresarCredenciales();
+            login.IngresarCredenciales(user, password);
         }
     }
 }
