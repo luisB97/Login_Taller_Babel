@@ -5,16 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Login_Taller_Babel.PageObject
+namespace Login_Taller_Babel.PageObject.Login
 {
-    public class LoginPage
+    public class LoginPage : BasePage
     {
-        public IWebDriver _driver; // _ significa que esta variable es privada solo de esta clase, nomenclatura de C#
-
-        public LoginPage(IWebDriver driver) //Esta pagina que es la misma va a recibir un driver de alguien más
-        {
-            _driver = driver;
-        }
+        public LoginPage(IWebDriver driver) : base(driver) { } //Inicializar clase dentro de la clase page para poder utilizar los elementos de esa clase
 
         //Privados para que solo esta clase tenga acceso a estos localizadores. Solo lectura porque la idea es que el valor de esos elementos no cambie durante el test
         private readonly By _txtUserName = By.Id("username");
@@ -25,7 +20,7 @@ namespace Login_Taller_Babel.PageObject
         public IWebElement password => _driver.FindElement(_txtPassword);
         public IWebElement botonLogin => _driver.FindElement(_btnLogin);
 
-        public void IngresarCredenciales(String user, String pass)
+        public void IngresarCredenciales(string user, string pass)
         {
             username.SendKeys(user);
             password.SendKeys(pass);
