@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Login_Taller_Babel.PageObject.Login
 {
     public class LoginPage : BasePage
     {
-        public LoginPage(IWebDriver driver) : base(driver) { } //Inicializar clase dentro de la clase page para poder utilizar los elementos de esa clase
+        public LoginPage(IWebDriver driver, WebDriverWait wait) : base(driver,wait) { } //Inicializar clase dentro de la clase page para poder utilizar los elementos de esa clase
 
         //Privados para que solo esta clase tenga acceso a estos localizadores. Solo lectura porque la idea es que el valor de esos elementos no cambie durante el test
         private readonly By _txtUserName = By.Id("username");
@@ -26,6 +27,10 @@ namespace Login_Taller_Babel.PageObject.Login
         {
             username.SendKeys(user);
             password.SendKeys(pass);
+        }
+
+        public void DarClickBotonLogin()
+        {
             botonLogin.Click();
         }
 
