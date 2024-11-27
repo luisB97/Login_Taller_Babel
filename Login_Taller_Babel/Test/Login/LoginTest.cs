@@ -28,6 +28,10 @@ namespace Login_Taller_Babel.Test.Test
             //String pass = data.password;
 
             login.IngresarCredenciales(user, pass);
+
+            //Assertions
+            //Assert.That(login.botonLogout.Displayed);
+            Assert.That(login.ValidarBoton());
         }
     }
 }
