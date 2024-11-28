@@ -21,6 +21,7 @@ namespace Login_Taller_Babel.Test
         public string baseURL = "https://the-internet.herokuapp.com/login";
         public WebDriverWait wait;
         public BasePage page;
+        public TomarCaptura captura;
 
         //Los hooks ejecutan ciertos trozos de código en ciertas partes de mi test, con esto no tengo duplicidad de código y reutilizo código
         [SetUp] //Ejecuta el trozo de código que esta en el SetUp y lo ejecuta antes de cada prueba
@@ -34,6 +35,7 @@ namespace Login_Taller_Babel.Test
 
             login = new LoginPage(driver, wait); //El driver definido en el test va a viajar a LoginPage
             page = new BasePage(driver, wait);
+            captura = new TomarCaptura();
         }
 
         [TearDown]
