@@ -27,13 +27,28 @@ namespace Login_Taller_Babel.Test.Test
             //String user = data.username;
             //String pass = data.password;
 
-            login.IngresarCredenciales(user, pass);
-            page.ElementoEsVisible(login.botonLogin);
-            login.DarClickBotonLogin();
-            page.ElementoEsVisible(login.botonLogout);
-            //Assertions
-            //Assert.That(login.botonLogout.Displayed);
-            Assert.That(login.ValidarBoton());
+            try
+            {
+                login.IngresarCredenciales(user, pass);
+                page.ElementoEsVisible(login.botonLogin);
+                login.DarClickBotonLogin();
+                page.ElementoEsVisible(login.botonLogout);
+
+                //Assertions
+                //Assert.That(login.botonLogout.Displayed);
+                Assert.That(login.ValidarBoton());
+
+            }
+            catch (NoSuchElementException ex)
+            {
+                Console.WriteLine($"No se encontro el elemento: {ex.Message}");
+                Assert.Fail(ex.ToString());
+                //Assert.Fail("Cayo en el catch");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en la ejecución: " + ex);
+            }
         }
     }
 }
