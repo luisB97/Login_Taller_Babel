@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using Login_Taller_Babel.PageObject;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 
 namespace Login_Taller_Babel.Test
 {
@@ -22,6 +24,10 @@ namespace Login_Taller_Babel.Test
         public WebDriverWait wait;
         public BasePage page;
         public TomarCaptura captura;
+
+        //reportes
+        public static ExtentTest test;
+        public static ExtentReports reports;
 
         //Los hooks ejecutan ciertos trozos de código en ciertas partes de mi test, con esto no tengo duplicidad de código y reutilizo código
         [SetUp] //Ejecuta el trozo de código que esta en el SetUp y lo ejecuta antes de cada prueba
@@ -43,6 +49,21 @@ namespace Login_Taller_Babel.Test
         {
             driver.Close();//Cerrar el navegador
             driver.Quit();//Cerrar el ChromeDriver del administrador de tareas
+        }
+
+        [OneTimeSetUp] //Solo una vez antes de mi set de pruebas
+        public void IniciarReporte()
+        {
+            reports = new ExtentReports(); //Inicializar reporte
+            ExtentSparkReporter htmlreporter = new ExtentSparkReporter(@"..\..\Reportes\index.html"); //Vaya a crear el html en la ruta
+            reports.AttachReporter(htmlreporter);
+            htmlreporter.Config.Theme = AventStack.ExtentReports.Reporter.Config.Theme.Dark;
+        }
+
+        [OneTimeTearDown] //Solo una vez después de mi set de pruebas
+        public void GenerarReporte()
+        {
+            reports.Flush(); //Generar el reporte html
         }
     }
 }
