@@ -1,0 +1,9 @@
+{
+  "configuracion": [
+    {
+      "baseURL": "https://the-internet.herokuapp.com/login",
+      "browser": "chrome",
+      "timeout":  5
+    }
+  ]
+}
