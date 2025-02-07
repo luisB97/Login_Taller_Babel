@@ -40,5 +40,10 @@ namespace Login_Taller_Babel.PageObject.Login
             return seMuestra;
         }
 
+        public void ClickBotonLogout()
+        {
+            botonLogout.Click();
+        }
+
     }
 }
