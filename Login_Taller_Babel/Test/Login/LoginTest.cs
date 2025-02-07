@@ -41,17 +41,20 @@ namespace Login_Taller_Babel.Test.Test
             }
             catch (NoSuchElementException ex)
             {
-                Console.WriteLine($"No se encontro el elemento: {ex.Message}");
-                captura.CapturarPantalla(driver);
-                test.Log(Status.Fail, "Fallo la prueba: " + ex);
-                Assert.Fail(ex.ToString());
+                test.AddScreenCaptureFromBase64String(captura.CapturarPantalla(driver));
+                Assert.Fail($"No se encontró el elemento: {ex.Message}");
+            }
+            catch (AssertionException ex)
+            {
+                test.Log(Status.Fail, $"Fallo de aserción: {ex.Message}");
+                test.AddScreenCaptureFromBase64String(captura.CapturarPantalla(driver));
+                Assert.Fail($"Fallo de aserción: {ex.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en la ejecución: " + ex);
-                captura.CapturarPantalla(driver);
-                test.Log(Status.Fail, "Fallo la prueba: " + ex);
-                Assert.Fail("Cayo en el catch");
+                test.Log(Status.Fail, $"Error en la ejecución del test: {ex.Message}");
+                test.AddScreenCaptureFromBase64String(captura.CapturarPantalla(driver));
+                Assert.Fail($"Error en la ejecución del test: {ex.Message}");
             }
         }
 
